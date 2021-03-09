@@ -1,30 +1,35 @@
 <script>
-	export let name;
+  import Table from "./Table.svelte";
+  import Form from "./Form.svelte";
+
+  let id;
+  let name = "";
+  let price = "";
+
+  function edit(event) {
+    ({ id, name, price } = event.detail);
+  }
+
+  function remove(event) {
+    id = null;
+    name = "";
+    price = "";
+  }
 </script>
 
-<main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-</main>
-
 <style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
+  main {
+    flex: 1;
+    align-content: center;
+    justify-content: center;
+    width: 80%;
+    margin: 0 auto;
+  }
 </style>
+
+<main>
+  <h1>Project Estimator</h1>
+  <Form bind:price bind:name bind:id />
+
+  <Table on:edit={edit} on:remove={remove} />
+</main>
